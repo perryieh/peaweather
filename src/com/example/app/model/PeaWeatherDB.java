@@ -19,7 +19,7 @@ public class PeaWeatherDB {
 	/*
 	 * 数据库版本
 	 */
-	public static final int VERSION = 1;
+	public static final int VERSION = 3;
 	private static PeaWeatherDB peaWeatherDB;
 	private SQLiteDatabase db;
 
@@ -59,7 +59,8 @@ public class PeaWeatherDB {
 	 */
 	public List<Province> loadProvinces() {
 		List<Province> list = new ArrayList<Province>();
-		Cursor cursor = db.query("Provice", null, null, null, null, null, null);
+		Cursor cursor = db
+				.query("Province", null, null, null, null, null, null);
 		if (cursor.moveToFirst()) {
 			do {
 				Province province = new Province();
@@ -95,14 +96,16 @@ public class PeaWeatherDB {
 	 */
 	public List<City> loadCities(int provinceId) {
 		List<City> list = new ArrayList<City>();
-		Cursor cursor = db.query("City", null, "province_id=?",
+		Cursor cursor = db.query("City", null, "province_id = ?",
 				new String[] { String.valueOf(provinceId) }, null, null, null);
 		if (cursor.moveToFirst()) {
 			do {
 				City city = new City();
 				city.setId(cursor.getInt(cursor.getColumnIndex("id")));
-				city.setCityName(cursor.getString(cursor.getColumnIndex("city_name")));
-				city.setCityCode(cursor.getString(cursor.getColumnIndex("city_code")));
+				city.setCityName(cursor.getString(cursor
+						.getColumnIndex("city_name")));
+				city.setCityCode(cursor.getString(cursor
+						.getColumnIndex("city_code")));
 				city.setProvinceId(provinceId);
 				list.add(city);
 			} while (cursor.moveToNext());
@@ -112,31 +115,37 @@ public class PeaWeatherDB {
 		}
 		return list;
 	}
+
 	/*
 	 * 将County实例存储到数据库
 	 */
-	public void saveCounty (County county) {
+
+	public void saveCounty(County county) {
 		if (county != null) {
 			ContentValues values = new ContentValues();
 			values.put("county_name", county.getCountyName());
 			values.put("county_code", county.getCountyCode());
 			values.put("city_id", county.getCityId());
 			db.insert("County", null, values);
+
 		}
 	}
-	
+
 	/*
 	 * 从数据库读取某城市下所有的县信息。
 	 */
-	public List<County> loadCounties (int cityId) {
+	public List<County> loadCounties(int cityId) {
 		List<County> list = new ArrayList<County>();
-		Cursor cursor = db.query("County", null, "city_id=?", new String [] {String.valueOf(cityId)}, null, null, null);
+		Cursor cursor = db.query("County", null, "city_id=?",
+				new String[] { String.valueOf(cityId) }, null, null, null);
 		if (cursor.moveToFirst()) {
 			do {
 				County county = new County();
 				county.setId(cursor.getInt(cursor.getColumnIndex("id")));
-				county.setCountyName(cursor.getString(cursor.getColumnIndex("county_name")));
-				county.setCountyCode(cursor.getString(cursor.getColumnIndex("county_code")));
+				county.setCountyName(cursor.getString(cursor
+						.getColumnIndex("county_name")));
+				county.setCountyCode(cursor.getString(cursor
+						.getColumnIndex("county_code")));
 				county.setCityId(cityId);
 				list.add(county);
 			} while (cursor.moveToNext());
@@ -144,7 +153,7 @@ public class PeaWeatherDB {
 		if (cursor != null) {
 			cursor.close();
 		}
-		
+
 		return list;
 	}
 

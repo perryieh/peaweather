@@ -22,14 +22,14 @@ public class PeaWeatherOpenHelper extends SQLiteOpenHelper {
 			"id integer primary key autoincrement, " +
 			"city_name text, " +
 			"city_code text, " +
-			"provice_id integer";
+			"province_id integer)";
 	/*
 	 * CountyΩ®±Ì”Ôæ‰
 	 */
 	public static final String CREATE_County = "create table County(" +
 			"id integer primary key autoincrement, " +
-			"County_name text, " +
-			"County_code text, " +
+			"county_name text, " +
+			"county_code text, " +
 			"city_id integer)";
 	public PeaWeatherOpenHelper(Context context, String name,
 			CursorFactory factory, int version) {

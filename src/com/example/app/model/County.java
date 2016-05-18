@@ -2,8 +2,8 @@ package com.example.app.model;
 
 public class County {
 	private int id;
-	private String CountyName;
-	private String CountyCode;
+	private String countyName;
+	private String countyCode;
 	private int cityId;
 	public int getId() {
 		return id;
@@ -12,16 +12,16 @@ public class County {
 		this.id = id;
 	}
 	public String getCountyName() {
-		return CountyName;
+		return countyName;
 	}
-	public void setCountyName(String CountyName) {
-		this.CountyName = CountyName;
+	public void setCountyName(String countyName) {
+		this.countyName = countyName;
 	}
 	public String getCountyCode() {
-		return CountyCode;
+		return countyCode;
 	}
-	public void setCountyCode(String CountyCode) {
-		this.CountyCode = CountyCode;
+	public void setCountyCode(String countyCode) {
+		this.countyCode = countyCode;
 	}
 	public int getCityId() {
 		return cityId;
@@ -29,6 +29,7 @@ public class County {
 	public void setCityId(int cityId) {
 		this.cityId = cityId;
 	}
+	
 	
 	
 }
